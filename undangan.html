@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f5;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      padding: 60px 20px;
+      background: #f8d7e5;
+      color: #5c2a3c;
+    }
+    h1 {
+      font-size: 2.5em;
+    }
+    .couple {
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+    .section {
+      padding: 40px 20px;
+    }
+    .section h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+    .date, .location {
+      font-size: 1.2em;
+    }
+    .button {
+      background: #d94873;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    .button:hover {
+      background: #b73c63;
+    }
+    footer {
+      padding: 20px;
+      font-size: 0.9em;
+      background: #fce4ec;
+    }
+    input, select, textarea {
+      padding: 10px;
+      margin: 8px 0;
+      width: 80%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Undangan Pernikahan</h1>
+    <div class="couple">Evinda & Fathan</div>
+  </header>
+
+  <section class="section">
+    <h2>Detail Acara</h2>
+    <div class="date">Rabu, 10 Desember 2025<br>Pukul 10.00 WIB</div>
+    <div class="location">Ballroom, Hotel Horison Batu</div>
+  </section>
+
+  <section class="section">
+    <h2>Pesan untuk Tamu</h2>
+    <p id="guest-message">Kami sangat berbahagia dan mengundang Anda untuk hadir di hari istimewa kami.</p>
+    <button class="button" onclick="changeMessage()">Ubah Pesan</button>
+  </section>
+
+  <section class="section">
+    <h2>RSVP Kehadiran</h2>
+    <form id="rsvpForm">
+      <input type="text" id="nama" placeholder="Nama Anda" required><br>
+      <select id="kehadiran">
+        <option value="Hadir">Hadir</option>
+        <option value="Tidak Hadir">Tidak Hadir</option>
+      </select><br>
+      <textarea id="ucapan" placeholder="Ucapan untuk mempelai" rows="3"></textarea><br>
+      <button type="submit" class="button">Kirim RSVP via WhatsApp</button>
+    </form>
+  </section>
+
+  <section class="section">
+    <h2>Bagikan Undangan</h2>
+    <button class="button" onclick="shareUndangan()">Bagikan via WhatsApp</button>
+  </section>
+
+  <footer>
+    &copy; 2025 Evinda & Fathanmubin. Terima kasih atas doa dan kehadiran Anda.
+  </footer>
+
+  <script>
+    function changeMessage() {
+      const message = document.getElementById("guest-message");
+      if (message.innerText.includes("berbahagia")) {
+        message.innerText = "Kami berharap Anda bisa hadir dan menjadi bagian dari momen spesial ini.";
+      } else {
+        message.innerText = "Kami sangat berbahagia dan mengundang Anda untuk hadir di hari istimewa kami.";
+      }
+    }
+
+    document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value.trim();
+      const kehadiran = document.getElementById("kehadiran").value;
+      const ucapan = document.getElementById("ucapan").value.trim();
+
+      if (!nama) {
+        alert("Nama tidak boleh kosong!");
+        return;
+      }
+
+      const message = `Halo! Saya ${nama}. Saya menyatakan ${kehadiran} pada pernikahan Evinda & Fathanmubin. Ucapan saya: ${ucapan}`;
+      const waUrl = `https://wa.me/6285604881716?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, '_blank');
+    });
+
+    function shareUndangan() {
+      const link = window.location.href;
+      const message = `Hai! Yuk lihat undangan pernikahan Evinda & Fathanmubin di sini: ${link}`;
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, '_blank');
+    }
+  </script>
+
+</body>
+</html>
